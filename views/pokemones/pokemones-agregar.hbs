@@ -1,0 +1,83 @@
+<main>
+  <div id="contenedor">
+  <div class="card">
+
+  
+    <h3 class="card-header"> {{#if editmode}}  Editar  {{else}} Agregar {{/if}} Pokemon</h3>
+    <div class="card-body">
+      <h4 class="card-title">No promuevas el maltrato animal.</h4>
+
+      <form method="POST" action="{{#if editmode}} /edit-pokemon {{else}} /crear_pokemon {{/if}}" >
+        <div class="mb-3">
+          <label for="Nombre_Pokemon" class="form-label">Nombre: </label>
+          <input type="text" class="form-control required" id="Nombre_Pokemon"  required  name="nombrepoke"  value="{{#if editmode}}{{pokemon.name}}{{else}}{{/if}}"/>
+        </div>
+
+        <div class="mb-3">
+          <label for="Foto_Pokemon" class="form-label">URL IMG: </label>
+          <input type="text" class="form-control required" id="Foto_Pokemon" required name="fotopoke" value="{{#if editmode}}{{pokemon.URL}}{{else}}{{/if}}"  />
+        </div>
+
+         <div class="mb-3">
+          <label for="descript" class="form-label">Descripción del pokemon: </label>
+          <input type="text" class="form-control " id="descript" required name="descripcion" value="{{#if editmode}}{{pokemon.description}}{{else}}{{/if}}"  />
+        </div>
+
+         {{#if hasregion}}
+
+            <div class="mb-3">
+            <label for="regions" class="form-label">Region: </label>
+            <select class="form-select" id="regions" name="regions" >
+
+              <option {{#if editmode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+
+              {{#each region as |regi|}}
+              {{#if (comparation regi.id ../pokemon.regionId)}}
+                  <option selected value="{{regi.id}}">{{regi.name}}</option>      
+                   {{else}}       
+                   <option value="{{regi.id}}">{{regi.name}}</option> 
+                  {{/if}}  
+               {{/each}}
+
+              
+            </select>
+          </div> 
+
+            {{else}}
+            <h5 class="card-text warning">No tenemos regiones</h5>
+            {{/if}}
+
+              {{#if hastipo}}
+
+            <div class="mb-3">
+            <label for="tipos" class="form-label">Tipo: </label>
+            <select  class="form-select" id="tipos" name="tipos">
+
+              <option {{#if editmode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+
+              {{#each tipo as |tip|}}
+               {{#if (comparation tip.id ../pokemon.tipoId)}}
+               <option selected value="{{tip.id}}">{{tip.name}}</option>
+                  {{else}}       
+                   <option value="{{tip.id}}">{{tip.name}}</option> 
+                  {{/if}}
+               {{/each}}
+              
+            </select>
+          </div>
+            <input type="hidden" name="nombreTipo" value="{{tip.name}}">
+
+            {{else}}
+            <h5 class="card-text warning">No tenemos tipos</h5>
+            {{/if}}
+
+
+         {{#if editmode}} <input type="hidden" name="pokeID" value="{{pokemon.id}}">  {{/if}}
+
+      <button id="agregar" type="submit" class="btn btn-primary">{{#if editmode}} Editar {{else}} Crear {{/if}}  Pokemon</button>
+      <a href="mantenimiento_poke" class="btn btn-warning">Atrás</a>
+    </form>
+    </div>
+  </div>
+  </div>
+</main>

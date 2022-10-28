@@ -1,0 +1,55 @@
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Listado De Regiones Editable</h1>
+        <p class="lead text-muted">En verdad a mí no me gusta Pokemon. Eso da sueño xD</p>
+        <p>
+          <a href="agregar_region" class="btn btn-primary my-2">Crear Regiones</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container" id="container2">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        {{#if hasregion}}
+
+        {{#each region as |regi|}}
+
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <img src="{{regi.URL}}" class="card-img-top" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">{{regi.name}}</h5>
+            </div>
+            <div class="card-body">
+
+              <form action="delete-region" method="post">
+                <input type="hidden" name="regionDeleteID" value="{{regi.id}}">
+                <button type="submit" class="btn btn-danger" id="btneliminarReg">Eliminar</button>
+              </form>
+              
+              <a href="/edit-region/{{regi.id}}?edit=true" class="btn btn-warning">Editar</a>
+            </div>
+          </div>
+        </div>
+
+        {{/each}}
+
+        {{else}}
+
+        <h1 class="card-title">
+          No hay regione míop D:
+        </h1>
+        
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+</main>

@@ -1,0 +1,24 @@
+<main>
+  <div class="card">
+    <h3 class="card-header"> {{#if editmode}} Editar  {{else}} Agregar {{/if}} Tipo</h3>
+    <div class="card-body">
+      <h4 class="card-title">No promuevas el maltrato animal.</h4>
+
+      <form method="POST" action="{{#if editmode}} /edit-tipo {{else}} /crear_tipo {{/if}}" >
+        <div class="mb-3">
+          <label for="Nombre_tipo" class="form-label">Nombre: </label>
+          <input type="text" class="form-control required" id="Nombre_tipo"  name="nombretipo"  value="{{#if editmode}}{{tipo.name}}{{else}}{{/if}}" required/>
+        </div>
+
+        <div class="mb-3">
+          <label for="Foto_tipo" class="form-label">URL IMG: </label>
+          <input type="text" class="form-control required" id="Foto_tipo" name="fototipo" value="{{#if editmode}}{{tipo.URL}}{{else}}{{/if}}" required />
+        </div>
+
+         {{#if editmode}} <input type="hidden" name="tipoID" value="{{tipo.id}}">  {{/if}}
+
+      <button type="submit" class="btn btn-primary">{{#if editmode}} Editar {{else}} Crear {{/if}} Tipo</button>
+      <a href="mantenimiento_tipo" class="btn btn-warning">Atrás</a>
+    </div>
+  </div>
+</main>

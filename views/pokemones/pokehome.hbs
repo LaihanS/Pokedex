@@ -1,0 +1,85 @@
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Listado Pokemon</h1>
+        <p class="lead text-muted">En verdad a mí no me gusta Pokemon. Eso da sueño xD</p>
+      </div>
+    </div>
+  </section>
+
+ <section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+  <form action="/filtrado" method="get">
+    <div class="mb-3">
+             <h1 class="fw-light">Buscar por region</h1>
+            <select class="form-select" id="regions" name="region">
+
+              <option>Seleccione una opcion </option>
+
+              {{#each region as |regi|}}    
+                       
+                   <option value="{{regi.id}}">{{regi.name}}</option> 
+               {{/each}}
+            </select>
+          </div>
+          <button id="agregar" type="submit" class="btn btn-primary">Dale</button>
+  </form>
+  </div>
+   </div>
+  </section>
+
+  <section id="search" class="search-wrap py-5 text-center container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Buscar Pokes</h1>
+    <form action="/busqueda" class="form-inline my-2 my-lg-0">
+      <i class="fas fa-search"></i>
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search", name="search">
+       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+    </div>
+    </div>
+  </section>
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+       {{#if haspokes}}
+
+        {{#each pokemones as |poke|}}
+
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <img src="{{poke.URL}}" class="card-img-top" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">{{poke.name}}</h5>
+              <h6 class="card-title">Region: {{poke.region.dataValues.name}}</h6>
+              <h6 class="card-title">Tipo: {{poke.tipo.dataValues.name}}</h6>
+              <p class="card-text">{{poke.description}}</p>
+            </div>
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
+
+         {{/each}}
+
+        {{else}}
+
+        <h1 class="card-title">
+          No hay pokemone míop D:
+        </h1>
+        
+        {{/if}}
+
+      </div>
+    </div>
+  </div>
+
+</main>

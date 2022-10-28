@@ -1,0 +1,25 @@
+<main>
+  <div class="card">
+    <h3 class="card-header"> {{#if editmode}} Editar  {{else}} Agregar {{/if}} Región</h3>
+    <div class="card-body">
+      <h4 class="card-title">No promuevas el maltrato animal.</h4>
+
+      <form method="POST" action="{{#if editmode}} /edit-region {{else}} /crear_region {{/if}}" >
+        <div class="mb-3">
+          <label for="Nombre_Region" class="form-label">Nombre: </label>
+          <input type="text" class="form-control" id="Nombre_Region"  name="nombreregion"  value="{{#if editmode}}{{region.name}}{{else}}{{/if}}" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="Foto_Region" class="form-label">URL IMG: </label>
+          <input type="text" class="form-control " id="Foto_Region"  name="fotoregion" value="{{#if editmode}}{{region.URL}}{{else}}{{/if}}"  required/>
+        </div>
+
+         {{#if editmode}} <input type="hidden" name="regionID" value="{{region.id}}">  {{/if}}
+
+      <button type="submit" class="btn btn-primary">{{#if editmode}} Editar {{else}} Crear {{/if}} Region</button>
+      <a href="mantenimiento_region" class="btn btn-warning">Atrás</a>
+      </form>
+    </div>
+  </div>
+</main>

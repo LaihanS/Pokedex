@@ -1,0 +1,61 @@
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Listado Pokemon Editable</h1>
+        <p class="lead text-muted">En verdad a mí no me gusta Pokemon. Eso da sueño xD</p>
+        <p>
+          <a href="agregar_pokemon" class="btn btn-primary my-2">Crear Pokemones</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container" id="container1">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        {{#if haspokes}}
+
+        {{#each pokemones as |poke|}}
+
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <img src="{{poke.URL}}" class="card-img-top" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">{{poke.name}}</h5>
+              <h6 class="card-title">Region: {{poke.region.dataValues.name}}</h6>
+               <h6 class="card-title">Tipo: {{poke.tipo.dataValues.name}}</h6>
+              <h6 class="card-title"></h6>
+              <p class="card-text">{{poke.description}}</p>
+            </div>
+            <div class="card-body">
+              <form action="delete-poke" method="post">
+                <input type="hidden" name="pokeDeleteID" value="{{poke.id}}">
+                <button type="button" class="btn btn-danger" id="btneliminarPokemon">Eliminar</button>
+              </form>
+
+
+              <a href="/edit-pokemon/{{poke.id}}?edit=true" class="btn btn-warning">Editar</a>
+            </div>
+          </div>
+        </div>
+
+        {{/each}}
+
+        {{else}}
+
+        <h1 class="card-title">
+          No hay pokemone míop D:
+        </h1>
+        
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+   
+</main>
+  
